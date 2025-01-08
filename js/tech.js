@@ -382,7 +382,7 @@ const tech = {
         requires: "not skinned",
         effect() {
             m.skin.mech();
-            m.setMovement()
+            m.setMovement(5)
         },
         remove() {
             if (this.count) m.resetSkin();
