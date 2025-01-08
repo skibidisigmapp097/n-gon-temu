@@ -142,8 +142,8 @@ const m = {
         x: 0,
         y: 0
     },
-    legLength1: 55,
-    legLength2: 45,
+    legLength1:85,
+    legLength2: 65,
     transX: 0,
     transY: 0,
     history: new Array(600), //[], //tracks the last second of player position
@@ -4026,11 +4026,11 @@ const m = {
             m.holdingMassScale = 0.01; //can hold heavier blocks with lower cost to jumping
             m.fieldMeterColor = "#333"
             m.eyeFillColor = m.fieldMeterColor
-            m.fieldHarmReduction = 0.5;
+            m.fieldHarmReduction = 0.1;
             m.fieldDrawRadius = 0;
 
             m.hold = function () {
-                m.airSpeedLimit = 125 //5 * player.mass * player.mass
+                m.airSpeedLimit = 355 //5 * player.mass * player.mass
                 m.FxAir = 0.016
                 if (m.isHolding) {
                     m.drawHold(m.holdingTarget);
@@ -4212,7 +4212,7 @@ const m = {
                 if (m.energy > m.maxEnergy - 0.02 && m.fieldCDcycle < m.cycle && !input.field && bullet.length < 300 && (m.cycle % 2)) {
                     if (simulation.molecularMode === 0) {
                         if (tech.isSporeFlea) {
-                            const drain = 0.18 + (Math.max(bullet.length, 130) - 130) * 0.02
+                            const drain = 0.04 + (Math.max(bullet.length, 130) - 130) * 0.02
                             if (m.energy > drain) {
                                 m.energy -= drain
                                 const speed = m.crouch ? 20 + 8 * Math.random() : 10 + 3 * Math.random()
@@ -4353,7 +4353,7 @@ const m = {
                     },
                     fire() {
                         this.isAttached = false;
-                        const speed = 10 //scale with mass?
+                        const speed = 20 //scale with mass?
                         Matter.Body.setVelocity(this, {
                             x: player.velocity.x * 0.4 + speed * Math.cos(m.angle),
                             y: speed * Math.sin(m.angle)
@@ -5187,7 +5187,7 @@ const m = {
                 }
                 if (input.field) {
                     if (m.fieldCDcycle < m.cycle) {
-                        const scale = 25
+                        const scale = 50
                         const bounds = {
                             min: {
                                 x: m.fieldPosition.x - scale,
@@ -5899,7 +5899,7 @@ const m = {
             // m.holdingMassScale = 0.01; //can hold heavier blocks with lower cost to jumping
             // m.fieldMeterColor = "#789"//"#456"
             m.eyeFillColor = m.fieldMeterColor
-            m.fieldHarmReduction = 0.5; //40% reduction
+            m.fieldHarmReduction = 0.3; //40% reduction
             m.grabPowerUpRange2 = 300000 //m.grabPowerUpRange2 = 200000;
 
             m.hold = function () {
